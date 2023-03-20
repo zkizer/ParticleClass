@@ -53,9 +53,8 @@ public class CLASParticle {
         switch (choice) {
             case SCINTILLATOR1:
                 energy = rsc.getEnergy(row, ReadScintillator.Layer.ONE);
-                System.out.println(row);
-                System.out.println(energy);
-                
+//                System.out.println(row);
+//                System.out.println(energy);
 //                energy = rsc.getEnergy(row, 1);
                 break;
                 
@@ -78,8 +77,8 @@ public class CLASParticle {
     }
     
     
-   //time
-   //path
+    //time
+    //path
     
     
     //test
@@ -94,11 +93,7 @@ public class CLASParticle {
         int counter = 0;
         while(r.hasNext()){
             counter++; if(counter>max) break;
-    //
     
-            
-            
-            
             part.read(r);
             part.show();
             
