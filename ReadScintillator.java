@@ -5,6 +5,7 @@
 import j4np.physics.VectorOperator.OperatorType;
 
 //code written by Zachary Nickischer
+// ../../bin/j4shell.sh ReadScintillator.java CLASParticle.java
 
 public class ReadScintillator {
     //Bank[] banks = r.getBanks("REC::Particle","REC::Calorimeter","REC::Scintillator","REC::Cherenkov");
@@ -29,7 +30,18 @@ public class ReadScintillator {
     
     public double getEnergy (int index, Layer choice){
         double energy = 0.0;
-        int     nrows = banks[0].getRows();
+        int nrows = banks[0].getRows();
+        
+        /*
+            The problem with the energy returning 0 is because the for loop is not running due to nrows = 0
+            I believe that nrows is being defined as 0 because their is an issue when cross refrencing the hipo file and it
+            is actually calling on a file with nothing inside therefor nrows = 0.
+            
+            There could also be a problem with how banks[0] is not running correctly because of the file loading. Banks[0] is
+            also used in CLASParticle, but it is defined locally in ReadScintillator and could be loading no banks when called
+            on from CLASParticle. Either way the error is located with the for loop not running because there are 0 rows
+            in the file called upon.
+         */
         
         switch(choice) {
             //layer 1
@@ -55,7 +67,6 @@ public class ReadScintillator {
                 break;
                
         }
-         
         return energy;
     }
     
@@ -90,6 +101,8 @@ public class ReadScintillator {
         }
         return time;
     }
+    
+    
     
     public double getPath (int index, Layer choice){
         double path = 0.0;
@@ -137,9 +150,9 @@ public class ReadScintillator {
             scint.show();
             
             
-            double energy = scint.getEnergy(0, Layer.TWO);
-            double time = scint.getTime(0, Layer.TWO);
-            double path = scint.getPath(0, Layer.TWO);
+            double energy = scint.getEnergy(0, Layer.ONE);
+            double time = scint.getTime(0, Layer.ONE);
+            double path = scint.getPath(0, Layer.ONE);
             
             System.out.printf(">>>>>>>> energy = %f\n",energy);
 //            System.out.printf(">>>>>>>> time = %f\n",time);

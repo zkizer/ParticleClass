@@ -47,8 +47,10 @@ public class CLASParticle {
     }
     
     
+    
     public double getEnergy (Detectors choice, int row){
         double energy = 0.0;
+        
         
         switch (choice) {
             case SCINTILLATOR1:
@@ -86,10 +88,12 @@ public class CLASParticle {
     public void show(){banks[0].show();}
     
     public static void run(int max){
+       
     
         HipoReader r = new HipoReader("infile.hipo");
+
         CLASParticle part = new CLASParticle(r);
-        
+
         int counter = 0;
         while(r.hasNext()){
             counter++; if(counter>max) break;
